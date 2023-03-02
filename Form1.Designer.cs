@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dailyRadioButton = new System.Windows.Forms.RadioButton();
@@ -37,22 +41,18 @@
             this.loadStockButton = new System.Windows.Forms.Button();
             this.startDate = new System.Windows.Forms.DateTimePicker();
             this.endDate = new System.Windows.Forms.DateTimePicker();
-            this.leChart = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.daListBoxe = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.openDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.highDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lowDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.closeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.volumeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.leChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.candleStickBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.leChart)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -143,26 +143,6 @@
             this.endDate.Size = new System.Drawing.Size(247, 22);
             this.endDate.TabIndex = 12;
             // 
-            // leChart
-            // 
-            this.leChart.AutoGenerateColumns = false;
-            this.leChart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.leChart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dateDataGridViewTextBoxColumn,
-            this.openDataGridViewTextBoxColumn,
-            this.highDataGridViewTextBoxColumn,
-            this.lowDataGridViewTextBoxColumn,
-            this.closeDataGridViewTextBoxColumn,
-            this.volumeDataGridViewTextBoxColumn});
-            this.leChart.Cursor = System.Windows.Forms.Cursors.Default;
-            this.leChart.DataSource = this.candleStickBindingSource1;
-            this.leChart.Location = new System.Drawing.Point(12, 15);
-            this.leChart.Name = "leChart";
-            this.leChart.RowHeadersWidth = 51;
-            this.leChart.RowTemplate.Height = 24;
-            this.leChart.Size = new System.Drawing.Size(646, 376);
-            this.leChart.TabIndex = 16;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dailyRadioButton);
@@ -207,53 +187,35 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Symbol";
             // 
-            // dateDataGridViewTextBoxColumn
+            // leChart
             // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.Width = 125;
+            chartArea1.Name = "ChartArea1";
+            this.leChart.ChartAreas.Add(chartArea1);
+            this.leChart.DataSource = this.candleStickBindingSource2;
+            legend1.Name = "Legend1";
+            this.leChart.Legends.Add(legend1);
+            this.leChart.Location = new System.Drawing.Point(7, 7);
+            this.leChart.Name = "leChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series1.Legend = "Legend1";
+            series1.Name = "Symbol";
+            series1.XValueMember = "Date";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series1.YValueMembers = "High, Low, Open, Close";
+            series1.YValuesPerPoint = 4;
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.leChart.Series.Add(series1);
+            this.leChart.Size = new System.Drawing.Size(651, 358);
+            this.leChart.TabIndex = 19;
+            this.leChart.Text = "chart1";
+            title1.Name = "Stock";
+            title1.Text = "Stock";
+            this.leChart.Titles.Add(title1);
             // 
-            // openDataGridViewTextBoxColumn
+            // candleStickBindingSource2
             // 
-            this.openDataGridViewTextBoxColumn.DataPropertyName = "Open";
-            this.openDataGridViewTextBoxColumn.HeaderText = "Open";
-            this.openDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.openDataGridViewTextBoxColumn.Name = "openDataGridViewTextBoxColumn";
-            this.openDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // highDataGridViewTextBoxColumn
-            // 
-            this.highDataGridViewTextBoxColumn.DataPropertyName = "High";
-            this.highDataGridViewTextBoxColumn.HeaderText = "High";
-            this.highDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.highDataGridViewTextBoxColumn.Name = "highDataGridViewTextBoxColumn";
-            this.highDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // lowDataGridViewTextBoxColumn
-            // 
-            this.lowDataGridViewTextBoxColumn.DataPropertyName = "Low";
-            this.lowDataGridViewTextBoxColumn.HeaderText = "Low";
-            this.lowDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.lowDataGridViewTextBoxColumn.Name = "lowDataGridViewTextBoxColumn";
-            this.lowDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // closeDataGridViewTextBoxColumn
-            // 
-            this.closeDataGridViewTextBoxColumn.DataPropertyName = "Close";
-            this.closeDataGridViewTextBoxColumn.HeaderText = "Close";
-            this.closeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.closeDataGridViewTextBoxColumn.Name = "closeDataGridViewTextBoxColumn";
-            this.closeDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // volumeDataGridViewTextBoxColumn
-            // 
-            this.volumeDataGridViewTextBoxColumn.DataPropertyName = "Volume";
-            this.volumeDataGridViewTextBoxColumn.HeaderText = "Volume";
-            this.volumeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.volumeDataGridViewTextBoxColumn.Name = "volumeDataGridViewTextBoxColumn";
-            this.volumeDataGridViewTextBoxColumn.Width = 125;
+            this.candleStickBindingSource2.DataSource = typeof(Stock_Ticker.CandleStick);
             // 
             // candleStickBindingSource1
             // 
@@ -268,23 +230,24 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 408);
+            this.Controls.Add(this.leChart);
             this.Controls.Add(this.loadStockButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.daListBoxe);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.leChart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.leChart)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -302,18 +265,13 @@
         private System.Windows.Forms.DateTimePicker startDate;
         private System.Windows.Forms.DateTimePicker endDate;
         private System.Windows.Forms.BindingSource candleStickBindingSource;
-        private System.Windows.Forms.DataGridView leChart;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn openDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn highDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lowDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn closeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn volumeDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource candleStickBindingSource1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox daListBoxe;
+        private System.Windows.Forms.DataVisualization.Charting.Chart leChart;
+        private System.Windows.Forms.BindingSource candleStickBindingSource2;
     }
 }
 

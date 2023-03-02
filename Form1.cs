@@ -18,7 +18,6 @@ namespace Stock_Ticker
         private Dictionary<String, Stock> Stocks = new Dictionary<String, Stock>();
         private DirectoryInfo StockDataFolderInfo = new DirectoryInfo("Stock Data");
         private TimePeriod selectedTimePeriod;
-        private List<CandleStick> dataSource = new List<CandleStick>();
         public Form1()
         {
             // Load all the candlesticks before the UI loads so that there aren't any errors.
@@ -122,11 +121,9 @@ namespace Stock_Ticker
         {
             if (daListBoxe.SelectedItem == null) return;
             string selectedStock = daListBoxe.SelectedItem.ToString();
-            dataSource = FilterCandleSticks(GetCandleSticks(selectedStock, selectedTimePeriod), startDate.Value, endDate.Value);
-            leChart.DataSource = dataSource;
-            //leChart.DataBind();
-            //leChart.DataBind(dataSource);
-            Console.WriteLine(dataSource);
+            leChart.DataSource = FilterCandleSticks(GetCandleSticks(selectedStock, selectedTimePeriod), startDate.Value, endDate.Value);
+            leChart.Series[0].Name = selectedTimePeriod.ToString();
+            leChart.Titles[0].Text = selectedStock;
         }
 
         private void monthlyRadioButton_CheckedChanged(object sender, EventArgs e)
