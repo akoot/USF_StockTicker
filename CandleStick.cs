@@ -5,33 +5,26 @@ namespace Stock_Ticker
 {
     internal class CandleStick
     {
-        private DateTime date;
-        private Decimal open;
-        private Decimal high;
-        private Decimal low;
-        private Decimal close;
-        private Decimal volume;
+        public DateTime Date { get; set; }
+        public double Open { get; set; }
+        public double High { get; set; }
+        public double Low { get; set; }
+        public double Close { get; set; }
+        public double Volume { get; set; }
 
-        public CandleStick(DateTime date, Decimal open, Decimal high, Decimal low, Decimal close, Decimal volume)
+        public CandleStick(DateTime date, double open, double high, double low, double close, double volume)
         {
-            this.date = date;
-            this.open = open;
-            this.high = high;
-            this.low = low;
-            this.close = close;
-            this.volume = volume;
+            this.Date = date;
+            this.Open = open;
+            this.High = high;
+            this.Low = low;
+            this.Close = close;
+            this.Volume = volume;
         }
-
-        public DateTime Date { get => date; set => date = value; }
-        public decimal Open { get => open; set => open = value; }
-        public decimal High { get => high; set => high = value; }
-        public decimal Low { get => low; set => low = value; }
-        public decimal Close { get => close; set => close = value; }
-        public decimal Volume { get => volume; set => volume = value; }
 
         override public string ToString()
         {
-            return $"Date: {date}, Open/High/Low/Close/Volume: {open}/{high}/{low}/{close}/{volume}";
+            return $"Date: {Date}, Open/High/Low/Close/Volume: {Open}/{High}/{Low}/{Close}/{Volume}";
         }
     }
 }

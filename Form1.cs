@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Stock_Ticker
 {
@@ -16,6 +17,8 @@ namespace Stock_Ticker
         // I would like to have a dictionary of CandleSticks so that I can call them by their symbol
         private Dictionary<String, Stock> Stocks = new Dictionary<String, Stock>();
         private DirectoryInfo StockDataFolderInfo = new DirectoryInfo("Stock Data");
+        private TimePeriod selectedTimePeriod;
+        private List<CandleStick> dataSource = new List<CandleStick>();
         public Form1()
         {
             // Load all the candlesticks before the UI loads so that there aren't any errors.
@@ -45,7 +48,7 @@ namespace Stock_Ticker
 
                 // https://learn.microsoft.com/en-us/dotnet/api/system.enum.parse?redirectedfrom=MSDN&view=net-7.0#System_Enum_Parse_System_Type_System_String_System_Boolean_
                 // I like using enums but researching them I read that they were a waste of time in C# or something (Java enjoyer). Too bad I guess, I will use them anyways
-                TimePeriod timePeriod = (TimePeriod)Enum.Parse(typeof(TimePeriod), nameParts[1].ToUpper()); // What an annoying way to do this in C#
+                TimePeriod timePeriod = (TimePeriod)Enum.Parse(typeof(TimePeriod), nameParts[1].ToUpper()); // What an annoying way to do this in C#, perhaps it's not meant to be!
 
                 // Go through all of the lines in each file and turn them into CandleStick objects.
                 foreach (String line in File.ReadLines(file.FullName))
@@ -62,11 +65,11 @@ namespace Stock_Ticker
                     // Console.WriteLine($"{symbol}:{timePeriod}{strings[0]}:{strings[1]}:{strings[2]}"); // It's called we do a little testing!
                     CandleStick candleStick = new CandleStick(
                         DateTime.Parse(dateString),
-                        Decimal.Parse(csv[1]),
-                        Decimal.Parse(csv[2]),
-                        Decimal.Parse(csv[3]),
-                        Decimal.Parse(csv[4]),
-                        Decimal.Parse(csv[5])
+                        double.Parse(csv[1]),
+                        double.Parse(csv[2]),
+                        double.Parse(csv[3]),
+                        double.Parse(csv[4]),
+                        double.Parse(csv[5])
                         );
                     Stocks[symbol].AddCandleStick(timePeriod, candleStick);
                 }
@@ -79,13 +82,13 @@ namespace Stock_Ticker
         }
 
         // why is commenting out code in vs so painful?
-        //private void printCandleSticks(List<CandleStick> candleSticks)
-        //{
-        //    foreach (CandleStick candleStick in candleSticks)
-        //    {
-        //        Console.WriteLine(candleStick);
-        //    }
-        //}
+        private void printCandleSticks(List<CandleStick> candleSticks)
+        {
+            foreach (CandleStick candleStick in candleSticks)
+            {
+                Console.WriteLine(candleStick);
+            }
+        }
 
         private List<CandleStick> FilterCandleSticks(List<CandleStick> candleSticks, DateTime startDate, DateTime endDate)
         {
@@ -108,7 +111,37 @@ namespace Stock_Ticker
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            foreach (string symbol in Stocks.Keys)
+            {
+                daListBoxe.Items.Add(symbol);
+            }
+            //leChart.Series[0].SetFinancialDataMembers("Argument", "Low", "High", "Open", "Close");
+        }
 
+        private void loadStockButton_Click(object sender, EventArgs e)
+        {
+            if (daListBoxe.SelectedItem == null) return;
+            string selectedStock = daListBoxe.SelectedItem.ToString();
+            dataSource = FilterCandleSticks(GetCandleSticks(selectedStock, selectedTimePeriod), startDate.Value, endDate.Value);
+            leChart.DataSource = dataSource;
+            //leChart.DataBind();
+            //leChart.DataBind(dataSource);
+            Console.WriteLine(dataSource);
+        }
+
+        private void monthlyRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (monthlyRadioButton.Checked) selectedTimePeriod = TimePeriod.MONTH;
+        }
+
+        private void weeklyRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (weeklyRadioButton.Checked) selectedTimePeriod = TimePeriod.WEEK;
+        }
+
+        private void dailyRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dailyRadioButton.Checked) selectedTimePeriod = TimePeriod.DAY;
         }
     }
 }
