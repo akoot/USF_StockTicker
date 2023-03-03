@@ -12,7 +12,7 @@ namespace Stock_Ticker
         public double Close { get; set; }
         public double Volume { get; set; }
 
-        public CandleStick(DateTime date, double high, double low, double open, double close, double volume)
+        public CandleStick(DateTime date, double open, double high, double low, double close, double volume)
         {
             this.Date = date;
             this.Open = open;
@@ -22,6 +22,7 @@ namespace Stock_Ticker
             this.Volume = volume;
         }
 
+        // This was used in testing
         override public string ToString()
         {
             return $"Date: {Date}, Open/High/Low/Close/Volume: {Open}/{High}/{Low}/{Close}/{Volume}";

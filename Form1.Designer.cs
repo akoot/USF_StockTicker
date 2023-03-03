@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dailyRadioButton = new System.Windows.Forms.RadioButton();
@@ -45,13 +41,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.daListBoxe = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.leChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.candleStickBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource)).BeginInit();
@@ -118,7 +112,7 @@
             // 
             // loadStockButton
             // 
-            this.loadStockButton.Location = new System.Drawing.Point(666, 336);
+            this.loadStockButton.Location = new System.Drawing.Point(18, 324);
             this.loadStockButton.Margin = new System.Windows.Forms.Padding(2);
             this.loadStockButton.Name = "loadStockButton";
             this.loadStockButton.Size = new System.Drawing.Size(109, 29);
@@ -148,7 +142,7 @@
             this.groupBox1.Controls.Add(this.dailyRadioButton);
             this.groupBox1.Controls.Add(this.weeklyRadioButton);
             this.groupBox1.Controls.Add(this.monthlyRadioButton);
-            this.groupBox1.Location = new System.Drawing.Point(666, 142);
+            this.groupBox1.Location = new System.Drawing.Point(18, 130);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(263, 56);
             this.groupBox1.TabIndex = 17;
@@ -162,7 +156,7 @@
             this.groupBox2.Controls.Add(this.startDate);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.endDate);
-            this.groupBox2.Location = new System.Drawing.Point(666, 204);
+            this.groupBox2.Location = new System.Drawing.Point(18, 192);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(263, 127);
             this.groupBox2.TabIndex = 18;
@@ -172,7 +166,7 @@
             // 
             this.daListBoxe.FormattingEnabled = true;
             this.daListBoxe.ItemHeight = 16;
-            this.daListBoxe.Location = new System.Drawing.Point(666, 52);
+            this.daListBoxe.Location = new System.Drawing.Point(18, 40);
             this.daListBoxe.Name = "daListBoxe";
             this.daListBoxe.Size = new System.Drawing.Size(120, 84);
             this.daListBoxe.TabIndex = 15;
@@ -180,38 +174,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(663, 33);
+            this.label1.Location = new System.Drawing.Point(15, 21);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Symbol";
-            // 
-            // leChart
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.leChart.ChartAreas.Add(chartArea1);
-            this.leChart.DataSource = this.candleStickBindingSource2;
-            legend1.Name = "Legend1";
-            this.leChart.Legends.Add(legend1);
-            this.leChart.Location = new System.Drawing.Point(7, 7);
-            this.leChart.Name = "leChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series1.Legend = "Legend1";
-            series1.Name = "Symbol";
-            series1.XValueMember = "Date";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            series1.YValueMembers = "High, Low, Open, Close";
-            series1.YValuesPerPoint = 4;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.leChart.Series.Add(series1);
-            this.leChart.Size = new System.Drawing.Size(651, 358);
-            this.leChart.TabIndex = 19;
-            this.leChart.Text = "chart1";
-            title1.Name = "Stock";
-            title1.Text = "Stock";
-            this.leChart.Titles.Add(title1);
             // 
             // candleStickBindingSource2
             // 
@@ -229,8 +197,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 408);
-            this.Controls.Add(this.leChart);
+            this.ClientSize = new System.Drawing.Size(314, 383);
             this.Controls.Add(this.loadStockButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
@@ -240,13 +207,12 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(3);
-            this.Text = "Form1";
+            this.Text = "Options";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource)).EndInit();
@@ -270,7 +236,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox daListBoxe;
-        private System.Windows.Forms.DataVisualization.Charting.Chart leChart;
         private System.Windows.Forms.BindingSource candleStickBindingSource2;
     }
 }

@@ -17,7 +17,8 @@ namespace Stock_Ticker
         // I would like to have a dictionary of CandleSticks so that I can call them by their symbol
         private Dictionary<String, Stock> Stocks = new Dictionary<String, Stock>();
         private DirectoryInfo StockDataFolderInfo = new DirectoryInfo("Stock Data");
-        private TimePeriod selectedTimePeriod;
+        private TimePeriod? selectedTimePeriod; // Could just get the value selected in the Form but..
+        private Chart form2 = new Chart(); // THIS is for a nice fullscreen chart that is otherwise impossible to see correctly, enjoy!
         public Form1()
         {
             // Load all the candlesticks before the UI loads so that there aren't any errors.
@@ -119,11 +120,7 @@ namespace Stock_Ticker
 
         private void loadStockButton_Click(object sender, EventArgs e)
         {
-            if (daListBoxe.SelectedItem == null) return;
-            string selectedStock = daListBoxe.SelectedItem.ToString();
-            leChart.DataSource = FilterCandleSticks(GetCandleSticks(selectedStock, selectedTimePeriod), startDate.Value, endDate.Value);
-            leChart.Series[0].Name = selectedTimePeriod.ToString();
-            leChart.Titles[0].Text = selectedStock;
+            updateLeChart();
         }
 
         private void monthlyRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -139,6 +136,17 @@ namespace Stock_Ticker
         private void dailyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (dailyRadioButton.Checked) selectedTimePeriod = TimePeriod.DAY;
+        }
+
+        private void updateLeChart()
+        {
+            if (daListBoxe.SelectedItem == null)
+            if (selectedTimePeriod == null) return;
+            string selectedStock = daListBoxe.SelectedItem.ToString();
+            form2.Show();
+            form2.leChart.DataSource = FilterCandleSticks(GetCandleSticks(selectedStock, (TimePeriod) selectedTimePeriod), startDate.Value, endDate.Value);
+            form2.leChart.Series[0].Name = selectedTimePeriod.ToString();
+            form2.leChart.Titles[0].Text = selectedStock;
         }
     }
 }
