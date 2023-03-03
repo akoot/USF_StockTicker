@@ -12,6 +12,7 @@ namespace Stock_Ticker
         public double Close { get; set; }
         public double Volume { get; set; }
 
+        // Create a candlestick object with all of the info from the CSV file
         public CandleStick(DateTime date, double open, double high, double low, double close, double volume)
         {
             this.Date = date;

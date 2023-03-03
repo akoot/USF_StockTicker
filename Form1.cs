@@ -74,6 +74,7 @@ namespace Stock_Ticker
                     Stocks[symbol].AddCandleStick(timePeriod, candleStick);
                 }
             }
+            // tests
             //Console.WriteLine(Stocks["AAPL"]);
             //Console.WriteLine("--All--");
             //printCandleSticks(Stocks["AAPL"].GetCandleSticks(TimePeriod.WEEK));
@@ -90,6 +91,7 @@ namespace Stock_Ticker
             }
         }
 
+        // Filters all of the candlesticks based on the start date and end date using a foreach loop.
         private List<CandleStick> FilterCandleSticks(List<CandleStick> candleSticks, DateTime startDate, DateTime endDate)
         {
             List<CandleStick> filteredList = new List<CandleStick>();
@@ -104,44 +106,53 @@ namespace Stock_Ticker
             return filteredList;
         }
 
+
+        // Gets the candlesticks for the time period (day/week/month)
         private List<CandleStick> GetCandleSticks(string symbol, TimePeriod timePeriod)
         {
             return Stocks[symbol].GetCandleSticks(timePeriod);
         }
 
+        // Load method
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Fill up the combo box with the stock symbols
             foreach (string symbol in Stocks.Keys)
             {
                 daListBoxe.Items.Add(symbol);
             }
-            //leChart.Series[0].SetFinancialDataMembers("Argument", "Low", "High", "Open", "Close");
         }
 
+        // when the load button is clicked
         private void loadStockButton_Click(object sender, EventArgs e)
         {
             updateLeChart();
         }
 
+        // when the monthly radio button is toggled
         private void monthlyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (monthlyRadioButton.Checked) selectedTimePeriod = TimePeriod.MONTH;
         }
 
+        // when the weekly radio button is toggled
         private void weeklyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (weeklyRadioButton.Checked) selectedTimePeriod = TimePeriod.WEEK;
         }
 
+        // when the daily radio button is toggled
         private void dailyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (dailyRadioButton.Checked) selectedTimePeriod = TimePeriod.DAY;
         }
 
+        // This method updates all of the information in the chart, including the title and series and of course, data source
         private void updateLeChart()
         {
             if (daListBoxe.SelectedItem == null)
             if (selectedTimePeriod == null) return;
+            // put a nice error message here
             string selectedStock = daListBoxe.SelectedItem.ToString();
             form2.Show();
             form2.leChart.DataSource = FilterCandleSticks(GetCandleSticks(selectedStock, (TimePeriod) selectedTimePeriod), startDate.Value, endDate.Value);
