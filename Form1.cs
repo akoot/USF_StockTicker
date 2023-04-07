@@ -27,6 +27,12 @@ namespace Stock_Ticker
             InitializeComponent();
         }
 
+        // Get name parts, I will use this again soon. Why? because it's funny!
+        private String[] GetNameParts(string filename)
+        {
+            return filename.Split(new char[] { '-', '.' });
+        }
+
         // Use a method to load the candlesticks into memory when the program loads.
         private void LoadCandleSticks()
         {
@@ -35,7 +41,7 @@ namespace Stock_Ticker
             {
                 // Splitting on '-' and '.' because '-' is between the name and the time period, and the '.' because of the extension.
                 // If they didn't have extensions, I would juse split on '-' but alas.
-                String[] nameParts = file.Name.Split(new char[] { '-', '.' });
+                String[] nameParts = GetNameParts(file.Name);
 
                 // The name is the first part of the filename so it will be index 0 of the string array.
                 String symbol = nameParts[0];
@@ -48,7 +54,7 @@ namespace Stock_Ticker
 
                 // https://learn.microsoft.com/en-us/dotnet/api/system.enum.parse?redirectedfrom=MSDN&view=net-7.0#System_Enum_Parse_System_Type_System_String_System_Boolean_
                 // I like using enums but researching them I read that they were a waste of time in C# or something (Java enjoyer). Too bad I guess, I will use them anyways
-                TimePeriod timePeriod = (TimePeriod)Enum.Parse(typeof(TimePeriod), nameParts[1].ToUpper()); // What an annoying way to do this in C#, perhaps it's not meant to be!
+                TimePeriod timePeriod = (TimePeriod)Enum.Parse(typeof(TimePeriod), nameParts[1]); // What an annoying way to do this in C#, perhaps it's not meant to be!
 
                 // Go through all of the lines in each file and turn them into CandleStick objects.
                 foreach (String line in File.ReadLines(file.FullName))
@@ -116,10 +122,22 @@ namespace Stock_Ticker
         // Load method
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Fill up the combo box with the stock symbols
-            foreach (string symbol in Stocks.Keys)
+        }
+
+        private void UpdateComboBox()
+        {
+            // Update selectedTimePeriod
+            if (monthlyRadioButton.Checked) selectedTimePeriod = TimePeriod.Month;
+            else if (weeklyRadioButton.Checked) selectedTimePeriod = TimePeriod.Week;
+            else if (dailyRadioButton.Checked) selectedTimePeriod = TimePeriod.Day;
+
+            // Setup the ComboBox
+            comboBox1.Items.Clear();
+            foreach (string  symbol in Stocks.Keys)
             {
-                daListBoxe.Items.Add(symbol);
+                // why would I go back and rename everything when I can just do this?
+                // Of course, in real life nobody should do this but...
+                comboBox1.Items.Add(symbol + "-" + selectedTimePeriod + ".csv");
             }
         }
 
@@ -132,32 +150,39 @@ namespace Stock_Ticker
         // when the monthly radio button is toggled
         private void monthlyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (monthlyRadioButton.Checked) selectedTimePeriod = TimePeriod.MONTH;
+
+            UpdateComboBox();
         }
 
         // when the weekly radio button is toggled
         private void weeklyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (weeklyRadioButton.Checked) selectedTimePeriod = TimePeriod.WEEK;
+            UpdateComboBox();
         }
 
         // when the daily radio button is toggled
         private void dailyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (dailyRadioButton.Checked) selectedTimePeriod = TimePeriod.DAY;
+            UpdateComboBox();
         }
 
         // This method updates all of the information in the chart, including the title and series and of course, data source
         private void updateLeChart()
         {
-            if (daListBoxe.SelectedItem == null)
+            if (comboBox1.SelectedItem == null)
             if (selectedTimePeriod == null) return;
             // put a nice error message here
-            string selectedStock = daListBoxe.SelectedItem.ToString();
+
+            // this is so funny, earlier i did this exact same thing! once again i cannot reiterate how i could simply go back and change how the values are stored
+            // in the first place, but instead i have decided to perform this disgrace and write these comments :)
+            string selectedCSV_LOL = comboBox1.SelectedItem.ToString();
+            String[] selectedParts = GetNameParts(selectedCSV_LOL); // HAHAHA
+            String selectedStock = selectedParts[0]; // they let you use lowercase string and uppercase String? This is such a funny programming language!
+
             form2.Show();
             form2.leChart.DataSource = FilterCandleSticks(GetCandleSticks(selectedStock, (TimePeriod) selectedTimePeriod), startDate.Value, endDate.Value);
             form2.leChart.Series[0].Name = selectedTimePeriod.ToString();
-            form2.leChart.Titles[0].Text = selectedStock;
+            form2.leChart.Titles[0].Text = selectedCSV_LOL;
         }
     }
 }

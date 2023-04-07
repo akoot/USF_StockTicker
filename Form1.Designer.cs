@@ -39,8 +39,8 @@
             this.endDate = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.daListBoxe = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.candleStickBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -54,30 +54,30 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 75);
+            this.label3.Location = new System.Drawing.Point(4, 61);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 16);
+            this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "End date";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(2, 18);
+            this.label4.Location = new System.Drawing.Point(2, 15);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 16);
+            this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "Start date";
             // 
             // dailyRadioButton
             // 
             this.dailyRadioButton.AutoSize = true;
-            this.dailyRadioButton.Location = new System.Drawing.Point(5, 20);
+            this.dailyRadioButton.Location = new System.Drawing.Point(4, 16);
             this.dailyRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.dailyRadioButton.Name = "dailyRadioButton";
-            this.dailyRadioButton.Size = new System.Drawing.Size(59, 20);
+            this.dailyRadioButton.Size = new System.Drawing.Size(48, 17);
             this.dailyRadioButton.TabIndex = 6;
             this.dailyRadioButton.TabStop = true;
             this.dailyRadioButton.Text = "Daily";
@@ -87,10 +87,10 @@
             // weeklyRadioButton
             // 
             this.weeklyRadioButton.AutoSize = true;
-            this.weeklyRadioButton.Location = new System.Drawing.Point(68, 20);
+            this.weeklyRadioButton.Location = new System.Drawing.Point(56, 16);
             this.weeklyRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.weeklyRadioButton.Name = "weeklyRadioButton";
-            this.weeklyRadioButton.Size = new System.Drawing.Size(74, 20);
+            this.weeklyRadioButton.Size = new System.Drawing.Size(61, 17);
             this.weeklyRadioButton.TabIndex = 7;
             this.weeklyRadioButton.TabStop = true;
             this.weeklyRadioButton.Text = "Weekly";
@@ -100,10 +100,10 @@
             // monthlyRadioButton
             // 
             this.monthlyRadioButton.AutoSize = true;
-            this.monthlyRadioButton.Location = new System.Drawing.Point(146, 20);
+            this.monthlyRadioButton.Location = new System.Drawing.Point(121, 16);
             this.monthlyRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.monthlyRadioButton.Name = "monthlyRadioButton";
-            this.monthlyRadioButton.Size = new System.Drawing.Size(74, 20);
+            this.monthlyRadioButton.Size = new System.Drawing.Size(62, 17);
             this.monthlyRadioButton.TabIndex = 8;
             this.monthlyRadioButton.TabStop = true;
             this.monthlyRadioButton.Text = "Monthly";
@@ -112,10 +112,10 @@
             // 
             // loadStockButton
             // 
-            this.loadStockButton.Location = new System.Drawing.Point(18, 324);
+            this.loadStockButton.Location = new System.Drawing.Point(14, 263);
             this.loadStockButton.Margin = new System.Windows.Forms.Padding(2);
             this.loadStockButton.Name = "loadStockButton";
-            this.loadStockButton.Size = new System.Drawing.Size(109, 29);
+            this.loadStockButton.Size = new System.Drawing.Size(82, 24);
             this.loadStockButton.TabIndex = 9;
             this.loadStockButton.Text = "LOAD STOCK";
             this.loadStockButton.UseVisualStyleBackColor = true;
@@ -123,18 +123,18 @@
             // 
             // startDate
             // 
-            this.startDate.Location = new System.Drawing.Point(5, 41);
+            this.startDate.Location = new System.Drawing.Point(4, 33);
             this.startDate.Margin = new System.Windows.Forms.Padding(2);
             this.startDate.Name = "startDate";
-            this.startDate.Size = new System.Drawing.Size(247, 22);
+            this.startDate.Size = new System.Drawing.Size(186, 20);
             this.startDate.TabIndex = 11;
             // 
             // endDate
             // 
-            this.endDate.Location = new System.Drawing.Point(8, 93);
+            this.endDate.Location = new System.Drawing.Point(6, 76);
             this.endDate.Margin = new System.Windows.Forms.Padding(2);
             this.endDate.Name = "endDate";
-            this.endDate.Size = new System.Drawing.Size(247, 22);
+            this.endDate.Size = new System.Drawing.Size(186, 20);
             this.endDate.TabIndex = 12;
             // 
             // groupBox1
@@ -142,9 +142,11 @@
             this.groupBox1.Controls.Add(this.dailyRadioButton);
             this.groupBox1.Controls.Add(this.weeklyRadioButton);
             this.groupBox1.Controls.Add(this.monthlyRadioButton);
-            this.groupBox1.Location = new System.Drawing.Point(18, 130);
+            this.groupBox1.Location = new System.Drawing.Point(14, 106);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(263, 56);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(197, 46);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "View";
@@ -156,30 +158,31 @@
             this.groupBox2.Controls.Add(this.startDate);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.endDate);
-            this.groupBox2.Location = new System.Drawing.Point(18, 192);
+            this.groupBox2.Location = new System.Drawing.Point(14, 156);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(263, 127);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(197, 103);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
-            // 
-            // daListBoxe
-            // 
-            this.daListBoxe.FormattingEnabled = true;
-            this.daListBoxe.ItemHeight = 16;
-            this.daListBoxe.Location = new System.Drawing.Point(18, 40);
-            this.daListBoxe.Name = "daListBoxe";
-            this.daListBoxe.Size = new System.Drawing.Size(120, 84);
-            this.daListBoxe.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 21);
+            this.label1.Location = new System.Drawing.Point(11, 17);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 16);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Symbol";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(14, 33);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 19;
             // 
             // candleStickBindingSource2
             // 
@@ -195,18 +198,18 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 383);
+            this.ClientSize = new System.Drawing.Size(236, 311);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.loadStockButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.daListBoxe);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Padding = new System.Windows.Forms.Padding(3);
+            this.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Text = "Options";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -235,8 +238,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox daListBoxe;
         private System.Windows.Forms.BindingSource candleStickBindingSource2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

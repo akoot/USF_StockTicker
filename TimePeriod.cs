@@ -2,6 +2,6 @@
 {
     internal enum TimePeriod
     {
-        DAY, WEEK, MONTH
+        Day, Week, Month
     }
 }
