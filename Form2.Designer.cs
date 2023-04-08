@@ -45,9 +45,11 @@
             this.leChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.leChart.Legends.Add(legend1);
-            this.leChart.Location = new System.Drawing.Point(12, 12);
-            this.leChart.MinimumSize = new System.Drawing.Size(776, 426);
+            this.leChart.Location = new System.Drawing.Point(9, 10);
+            this.leChart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.leChart.MinimumSize = new System.Drawing.Size(582, 346);
             this.leChart.Name = "leChart";
+            this.leChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
             series1.Legend = "Legend1";
@@ -58,7 +60,7 @@
             series1.YValuesPerPoint = 4;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             this.leChart.Series.Add(series1);
-            this.leChart.Size = new System.Drawing.Size(776, 426);
+            this.leChart.Size = new System.Drawing.Size(582, 346);
             this.leChart.TabIndex = 20;
             this.leChart.Text = "chart1";
             title1.Name = "Stock";
@@ -67,11 +69,12 @@
             // 
             // Chart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.leChart);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Chart";
             this.Text = "Chart";
             ((System.ComponentModel.ISupportInitialize)(this.leChart)).EndInit();

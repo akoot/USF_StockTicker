@@ -122,6 +122,8 @@ namespace Stock_Ticker
         // Load method
         private void Form1_Load(object sender, EventArgs e)
         {
+            // nevermind, don't do anything after all
+            // maybe some other day...
         }
 
         private void UpdateComboBox()
@@ -179,10 +181,38 @@ namespace Stock_Ticker
             String[] selectedParts = GetNameParts(selectedCSV_LOL); // HAHAHA
             String selectedStock = selectedParts[0]; // they let you use lowercase string and uppercase String? This is such a funny programming language!
 
+            // Filter the sticks based on the selected CSV file
+            List<CandleStick> filteredCandleSticks = FilterCandleSticks(GetCandleSticks(selectedStock, (TimePeriod)selectedTimePeriod), startDate.Value, endDate.Value);
+            var chart = form2.leChart;
+            chart.DataSource = filteredCandleSticks;
+            chart.DataBind();
+
+            // Design
+            chart.Titles[0].Text = selectedCSV_LOL;
+            chart.Legends[0].Title = "The Legend of Zelda";
+            chart.Legends[0].CustomItems.Add(new LegendItem("Doji", Color.Red, "")); // had to decompile the LegendItem class to find out that the image should be "" and not null
+
+            Series series = chart.Series[0];
+            series.Name = selectedTimePeriod.ToString();
+
+            //if (series.Points.Count < 1) return;
+
+            int x = 0;
+            foreach (CandleStick candleStick in filteredCandleSticks)
+            {
+                if (x % 2 == 0)
+                {
+                    Console.WriteLine(x);
+                    series.Points[x++].Color = Color.Red;
+                } else
+                {
+                    //dojiSeries.Points.AddXY(candleStick);
+                }
+            }
+
+            AlgorithmEnjoyer.getDojiCandlesticks(filteredCandleSticks);
+            series.Color = Color.Gray;
             form2.Show();
-            form2.leChart.DataSource = FilterCandleSticks(GetCandleSticks(selectedStock, (TimePeriod) selectedTimePeriod), startDate.Value, endDate.Value);
-            form2.leChart.Series[0].Name = selectedTimePeriod.ToString();
-            form2.leChart.Titles[0].Text = selectedCSV_LOL;
         }
     }
 }
