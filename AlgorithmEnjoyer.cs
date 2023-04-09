@@ -4,10 +4,46 @@ namespace Stock_Ticker
 {
     internal static class AlgorithmEnjoyer
     {
-        // You are going to get a kick out of this one! All of these methods will return an array of INDICES! Isn't that truly magnificent? I think so too
-        public static int[] getDojiCandlesticks(List<CandleStick> candleSticks)
+        // Function to find bullish engulfing patterns
+        public static int[] FindBullishEngulfingPatterns(List<CandleStick> candlesticks)
         {
-            return new int[0];
+            List<int> bullishEngulfingIndices = new List<int>();
+
+            for (int i = 1; i < candlesticks.Count; i++)
+            {
+                CandleStick current = candlesticks[i];
+                CandleStick previous = candlesticks[i - 1];
+
+                if (current.Open < current.Close && previous.Open > previous.Close &&
+                    current.Close > previous.Open && current.Open < previous.Close &&
+                    current.High > previous.High && current.Low < previous.Low)
+                {
+                    bullishEngulfingIndices.Add(i);
+                }
+            }
+
+            return bullishEngulfingIndices.ToArray();
+        }
+
+        // Function to find bearish engulfing patterns
+        public static int[] FindBearishEngulfingPatterns(List<CandleStick> candlesticks)
+        {
+            List<int> bearishEngulfingIndices = new List<int>();
+
+            for (int i = 1; i < candlesticks.Count; i++)
+            {
+                CandleStick current = candlesticks[i];
+                CandleStick previous = candlesticks[i - 1];
+
+                if (current.Open > current.Close && previous.Open < previous.Close &&
+                    current.Close < previous.Open && current.Open > previous.Close &&
+                    current.High > previous.High && current.Low < previous.Low)
+                {
+                    bearishEngulfingIndices.Add(i);
+                }
+            }
+
+            return bearishEngulfingIndices.ToArray();
         }
     }
 }

@@ -28,5 +28,52 @@ namespace Stock_Ticker
         {
             return $"Date: {Date}, Open/High/Low/Close/Volume: {Open}/{High}/{Low}/{Close}/{Volume}";
         }
+
+        // Function to determine the pattern
+        public Pattern? GetPattern()
+        {
+            double bodyLength = Math.Abs(Open - Close);
+            double totalLength = High - Low;
+            double upperShadowLength = High - Math.Max(Open, Close);
+            double lowerShadowLength = Math.Min(Open, Close) - Low;
+
+            if (bodyLength <= totalLength * 0.1 && upperShadowLength > bodyLength && lowerShadowLength > bodyLength)
+            {
+                // Neutral Doji
+                return Pattern.DOJI_NEUTRAL;
+            }
+            else if (bodyLength <= totalLength * 0.1 && upperShadowLength > bodyLength * 2 && lowerShadowLength > bodyLength * 2)
+            {
+                // Long-Legged Doji
+                return Pattern.DOJI_LONG_LEGGED;
+            }
+            else if (bodyLength <= totalLength * 0.1 && upperShadowLength < bodyLength && lowerShadowLength > bodyLength)
+            {
+                // Gravestone Doji
+                return Pattern.DOJI_GRAVESTONE;
+            }
+            else if (bodyLength <= totalLength * 0.1 && upperShadowLength > bodyLength && lowerShadowLength < bodyLength)
+            {
+                // Dragonfly Doji
+                return Pattern.DOJI_DRAGONFLY;
+            }
+            else if (bodyLength >= totalLength * 0.9 && upperShadowLength <= bodyLength * 0.1 && lowerShadowLength <= bodyLength * 0.1)
+            {
+                // Marubozu pattern
+                return Pattern.MARUBOZU;
+            }
+            else if (bodyLength <= totalLength * 0.1 && lowerShadowLength >= bodyLength * 2 && upperShadowLength <= bodyLength * 0.1)
+            {
+                // Hammer pattern
+                return Pattern.HAMMER;
+            }
+            else
+            {
+                // Not a pattern
+                return null;
+            }
+        }
+
+        public 
     }
 }

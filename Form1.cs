@@ -193,25 +193,16 @@ namespace Stock_Ticker
             chart.Legends[0].CustomItems.Add(new LegendItem("Doji", Color.Red, "")); // had to decompile the LegendItem class to find out that the image should be "" and not null
 
             Series series = chart.Series[0];
+            series.Color = Color.Gray;
             series.Name = selectedTimePeriod.ToString();
 
-            //if (series.Points.Count < 1) return;
-
-            int x = 0;
-            foreach (CandleStick candleStick in filteredCandleSticks)
+            int[] indices = AlgorithmEnjoyer.getDojiCandlesticks(filteredCandleSticks);
+            for (int i = 0; i < indices.Length; i++)
             {
-                if (x % 2 == 0)
-                {
-                    Console.WriteLine(x);
-                    series.Points[x++].Color = Color.Red;
-                } else
-                {
-                    //dojiSeries.Points.AddXY(candleStick);
-                }
+                series.Points[i].Color = Color.Red;
             }
 
             AlgorithmEnjoyer.getDojiCandlesticks(filteredCandleSticks);
-            series.Color = Color.Gray;
             form2.Show();
         }
     }
