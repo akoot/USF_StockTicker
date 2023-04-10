@@ -4,6 +4,8 @@
     {
         DOJI_NEUTRAL, DOJI_LONG_LEGGED, DOJI_GRAVESTONE, DOJI_DRAGONFLY,
         MARUBOZU,
-        HAMMER
+        HAMMER,
+        BEARISH,
+        BULLISH
     }
 }

@@ -44,6 +44,8 @@
             this.candleStickBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.candleStickBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patternBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.candleStickBindingSource2)).BeginInit();
@@ -143,9 +145,9 @@
             this.groupBox1.Controls.Add(this.weeklyRadioButton);
             this.groupBox1.Controls.Add(this.monthlyRadioButton);
             this.groupBox1.Location = new System.Drawing.Point(14, 106);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(197, 46);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
@@ -159,9 +161,9 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.endDate);
             this.groupBox2.Location = new System.Drawing.Point(14, 156);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(197, 103);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
@@ -196,11 +198,30 @@
             // 
             this.candleStickBindingSource.DataSource = typeof(Stock_Ticker.CandleStick);
             // 
+            // patternBox
+            // 
+            this.patternBox.FormattingEnabled = true;
+            this.patternBox.Location = new System.Drawing.Point(14, 77);
+            this.patternBox.Name = "patternBox";
+            this.patternBox.Size = new System.Drawing.Size(121, 21);
+            this.patternBox.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Pattern";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(236, 311);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.patternBox);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.loadStockButton);
             this.Controls.Add(this.label1);
@@ -209,7 +230,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Padding = new System.Windows.Forms.Padding(2);
             this.Text = "Options";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -240,6 +261,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource candleStickBindingSource2;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox patternBox;
+        private System.Windows.Forms.Label label2;
     }
 }
 

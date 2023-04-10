@@ -54,7 +54,7 @@ namespace Stock_Ticker
 
                 // https://learn.microsoft.com/en-us/dotnet/api/system.enum.parse?redirectedfrom=MSDN&view=net-7.0#System_Enum_Parse_System_Type_System_String_System_Boolean_
                 // I like using enums but researching them I read that they were a waste of time in C# or something (Java enjoyer). Too bad I guess, I will use them anyways
-                TimePeriod timePeriod = (TimePeriod)Enum.Parse(typeof(TimePeriod), nameParts[1]); // What an annoying way to do this in C#, perhaps it's not meant to be!
+                TimePeriod timePeriod = (TimePeriod)Enum.Parse(typeof(TimePeriod), nameParts[1].ToUpper()); // What an annoying way to do this in C#, perhaps it's not meant to be!
 
                 // Go through all of the lines in each file and turn them into CandleStick objects.
                 foreach (String line in File.ReadLines(file.FullName))
@@ -119,19 +119,47 @@ namespace Stock_Ticker
             return Stocks[symbol].GetCandleSticks(timePeriod);
         }
 
+        // simply asked chatgpt to make this for me
+        static string ConvertToTitleCase(string input)
+        {
+            // Split the input by underscores
+            string[] words = input.Split('_');
+
+            // Initialize a StringBuilder to build the output string
+            StringBuilder sb = new StringBuilder();
+
+            foreach (string word in words)
+            {
+                // Convert the first character of each word to uppercase
+                // and the remaining characters to lowercase
+                string formattedWord = char.ToUpper(word[0]) + word.Substring(1).ToLower();
+
+                // Append the formatted word to the StringBuilder
+                sb.Append(formattedWord).Append(" ");
+            }
+
+            // Remove the trailing space and return the final title case string
+            return sb.ToString().Trim();
+        }
+
         // Load method
         private void Form1_Load(object sender, EventArgs e)
         {
             // nevermind, don't do anything after all
             // maybe some other day...
+            // wait i remember now, i need to fill up the patternBox
+            foreach (var pattern in Enum.GetNames(typeof(Pattern)))
+            {
+                patternBox.Items.Add(ConvertToTitleCase(pattern));
+            }
         }
 
         private void UpdateComboBox()
         {
             // Update selectedTimePeriod
-            if (monthlyRadioButton.Checked) selectedTimePeriod = TimePeriod.Month;
-            else if (weeklyRadioButton.Checked) selectedTimePeriod = TimePeriod.Week;
-            else if (dailyRadioButton.Checked) selectedTimePeriod = TimePeriod.Day;
+            if (monthlyRadioButton.Checked) selectedTimePeriod = TimePeriod.MONTH;
+            else if (weeklyRadioButton.Checked) selectedTimePeriod = TimePeriod.WEEK;
+            else if (dailyRadioButton.Checked) selectedTimePeriod = TimePeriod.DAY;
 
             // Setup the ComboBox
             comboBox1.Items.Clear();
@@ -139,7 +167,7 @@ namespace Stock_Ticker
             {
                 // why would I go back and rename everything when I can just do this?
                 // Of course, in real life nobody should do this but...
-                comboBox1.Items.Add(symbol + "-" + selectedTimePeriod + ".csv");
+                comboBox1.Items.Add(symbol + "-" + ConvertToTitleCase(selectedTimePeriod.ToString()) + ".csv");
             }
         }
 
@@ -189,21 +217,114 @@ namespace Stock_Ticker
 
             // Design
             chart.Titles[0].Text = selectedCSV_LOL;
-            chart.Legends[0].Title = "The Legend of Zelda";
-            chart.Legends[0].CustomItems.Add(new LegendItem("Doji", Color.Red, "")); // had to decompile the LegendItem class to find out that the image should be "" and not null
+            var legend = chart.Legends[0];
+            legend.Title = "The Legend of Zelda";
+            legend.CustomItems.Clear();
 
             Series series = chart.Series[0];
             series.Color = Color.Gray;
             series.Name = selectedTimePeriod.ToString();
 
-            int[] indices = AlgorithmEnjoyer.getDojiCandlesticks(filteredCandleSticks);
-            for (int i = 0; i < indices.Length; i++)
+            form2.Show();
+
+            if (patternBox.SelectedItem == null) return;
+
+            Pattern pattern = (Pattern)Enum.Parse(typeof(Pattern), patternBox.SelectedItem.ToString().ToUpper().Replace(" ", "_"));
+
+            // This could be extracted into a function but OH WELL!
+            switch (pattern)
             {
-                series.Points[i].Color = Color.Red;
+                case Pattern.DOJI_NEUTRAL:
+                    {
+                        legend.CustomItems.Add(Color.Orange, "Doji Neutral");
+                        for (int i = 0; i < filteredCandleSticks.Count; i++)
+                        {
+                            if (filteredCandleSticks[i].GetPattern() == pattern)
+                                series.Points[i].Color = Color.Orange;
+                        }
+
+                        break;
+                    }
+
+                case Pattern.DOJI_LONG_LEGGED:
+                    {
+                        legend.CustomItems.Add(Color.Yellow, "Doji Long-Legged");
+                        for (int i = 0; i < filteredCandleSticks.Count; i++)
+                        {
+                            if (filteredCandleSticks[i].GetPattern() == pattern)
+                                series.Points[i].Color = Color.Yellow;
+                        }
+
+                        break;
+                    }
+
+                case Pattern.DOJI_GRAVESTONE:
+                    {
+                        legend.CustomItems.Add(Color.OrangeRed, "Doji Gravestone");
+                        for (int i = 0; i < filteredCandleSticks.Count; i++)
+                        {
+                            if (filteredCandleSticks[i].GetPattern() == pattern)
+                                series.Points[i].Color = Color.OrangeRed;
+                        }
+
+                        break;
+                    }
+                case Pattern.DOJI_DRAGONFLY:
+                    {
+                        legend.CustomItems.Add(Color.DarkOrange, "Doji Dragonfly");
+                        for (int i = 0; i < filteredCandleSticks.Count; i++)
+                        {
+                            if (filteredCandleSticks[i].GetPattern() == pattern)
+                                series.Points[i].Color = Color.DarkOrange;
+                        }
+
+                        break;
+                    }
+                case Pattern.MARUBOZU:
+                    {
+                        legend.CustomItems.Add(Color.Blue, "Blue");
+                        for (int i = 0; i < filteredCandleSticks.Count; i++)
+                        {
+                            if (filteredCandleSticks[i].GetPattern() == pattern)
+                                series.Points[i].Color = Color.Blue;
+                        }
+
+                        break;
+                    }
+                case Pattern.HAMMER:
+                    {
+                        legend.CustomItems.Add(Color.Violet, "Hammer");
+                        for (int i = 0; i < filteredCandleSticks.Count; i++)
+                        {
+                            if (filteredCandleSticks[i].GetPattern() == pattern)
+                                series.Points[i].Color = Color.Violet;
+                        }
+
+                        break;
+                    }
+                case Pattern.BULLISH:
+                    {
+                        legend.CustomItems.Add(Color.Green, "Bullish");
+                        foreach (int i in AlgorithmEnjoyer.FindBullishEngulfingPatterns(filteredCandleSticks))
+                        {
+                            series.Points[i].Color = Color.Green;
+                        }
+                        break;
+                    }
+                case Pattern.BEARISH:
+                    {
+                        legend.CustomItems.Add(Color.Red, "Bearish");
+                        foreach (int i in AlgorithmEnjoyer.FindBearishEngulfingPatterns(filteredCandleSticks))
+                        {
+                            series.Points[i].Color = Color.Red;
+                        }
+                        break;
+                    }
             }
 
-            AlgorithmEnjoyer.getDojiCandlesticks(filteredCandleSticks);
-            form2.Show();
+            
+
+            
         }
     }
 }

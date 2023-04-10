@@ -73,7 +73,5 @@ namespace Stock_Ticker
                 return null;
             }
         }
-
-        public 
     }
 }

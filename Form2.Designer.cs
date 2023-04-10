@@ -46,7 +46,7 @@
             legend1.Name = "Legend1";
             this.leChart.Legends.Add(legend1);
             this.leChart.Location = new System.Drawing.Point(9, 10);
-            this.leChart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.leChart.Margin = new System.Windows.Forms.Padding(2);
             this.leChart.MinimumSize = new System.Drawing.Size(582, 346);
             this.leChart.Name = "leChart";
             this.leChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
@@ -74,7 +74,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.leChart);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Chart";
             this.Text = "Chart";
             ((System.ComponentModel.ISupportInitialize)(this.leChart)).EndInit();
